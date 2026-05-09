@@ -9,58 +9,84 @@ function TransactionForm({ fetchTransactions }) {
     category: '',
     type: 'expense'
   });
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+    setError('');
+  };
+
+  const isFormValid = () => {
+    return formData.title.trim() && formData.amount && formData.category.trim();
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    setLoading(true);
 
-    await API.post('/transactions', {
-      ...formData,
-      amount: Number(formData.amount)
-    });
+    if (!isFormValid()) {
+      setError('Please fill in all required fields');
+      setLoading(false);
+      return;
+    }
 
-    fetchTransactions();
+    try {
+      await API.post('/transactions', {
+        ...formData,
+        amount: Number(formData.amount)
+      });
 
-    setFormData({
-      title: '',
-      amount: '',
-      category: '',
-      type: 'expense'
-    });
+      fetchTransactions();
+
+      setFormData({
+        title: '',
+        amount: '',
+        category: '',
+        type: 'expense'
+      });
+    } catch (err) {
+      setError(err.response?.data?.message || 'Failed to add transaction');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <form className='transaction-form' onSubmit={handleSubmit}>
       <h2>Add Transaction</h2>
 
+      {error && <div className='error-message'>{error}</div>}
+
       <input
         type='text'
         name='title'
-        placeholder='Title'
+        placeholder='Title *'
         value={formData.title}
         onChange={handleChange}
+        required
       />
 
       <input
         type='number'
         name='amount'
-        placeholder='Amount'
+        placeholder='Amount *'
         value={formData.amount}
         onChange={handleChange}
+        required
       />
 
       <input
         type='text'
         name='category'
-        placeholder='Category'
+        placeholder='Category *'
         value={formData.category}
         onChange={handleChange}
+        required
       />
 
       <select name='type' value={formData.type} onChange={handleChange}>
@@ -68,7 +94,9 @@ function TransactionForm({ fetchTransactions }) {
         <option value='expense'>Expense</option>
       </select>
 
-      <button type='submit'>Add</button>
+      <button type='submit' disabled={!isFormValid() || loading}>
+        {loading ? 'Adding...' : 'Add'}
+      </button>
     </form>
   );
 }
