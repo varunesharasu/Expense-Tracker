@@ -146,6 +146,51 @@
   font-size: 14px;
 }
 
+.page-alert {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #fbe8e8;
+  color: #9b2c2c;
+  border: 1px solid #f3caca;
+  font-size: 14px;
+}
+
+.report-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.report-button {
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: none;
+  background: var(--accent);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 10px 18px rgba(31, 122, 106, 0.2);
+}
+
+.report-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 22px rgba(31, 122, 106, 0.28);
+}
+
+.report-button:disabled {
+  background: #c9d5d2;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.report-button.outline {
+  background: transparent;
+  border: 1px solid rgba(31, 122, 106, 0.35);
+  color: var(--accent-strong);
+  box-shadow: none;
+}
+
 @media (max-width: 1100px) {
   .dashboard {
     flex-direction: column;

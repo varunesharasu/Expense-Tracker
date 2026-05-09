@@ -24,6 +24,9 @@ function Login() {
     const res = await API.post('/auth/login', formData);
 
     localStorage.setItem('token', res.data.token);
+    if (res.data.user) {
+      localStorage.setItem('user', JSON.stringify(res.data.user));
+    }
 
     navigate('/dashboard');
   };

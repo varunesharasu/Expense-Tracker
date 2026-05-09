@@ -2,7 +2,12 @@ import React from 'react';
 import './TransactionList.css';
 import API from '../services/api';
 
-function TransactionList({ transactions, fetchTransactions }) {
+function TransactionList({
+  transactions,
+  fetchTransactions,
+  title = 'Transactions',
+  emptyMessage = 'No transactions yet.'
+}) {
   const deleteTransaction = async (id) => {
     await API.delete(`/transactions/${id}`);
     fetchTransactions();
@@ -10,10 +15,10 @@ function TransactionList({ transactions, fetchTransactions }) {
 
   return (
     <div className='transaction-list'>
-      <h2>Transactions</h2>
+      <h2>{title}</h2>
 
       {transactions.length === 0 ? (
-        <div className='empty-state'>No transactions yet.</div>
+        <div className='empty-state'>{emptyMessage}</div>
       ) : (
         transactions.map((item) => (
           <div className='transaction-item' key={item._id}>
