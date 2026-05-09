@@ -13,8 +13,12 @@ function Dashboard() {
   const [transactions, setTransactions] = useState([]);
 
   const fetchTransactions = async () => {
-    const res = await API.get('/transactions');
-    setTransactions(res.data);
+    try {
+      const res = await API.get('/transactions');
+      setTransactions(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
