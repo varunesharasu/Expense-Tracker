@@ -31,27 +31,42 @@ function Login() {
   return (
     <div className='login-container'>
       <form className='login-form' onSubmit={handleSubmit}>
-        <h2>Login</h2>
+        <div className='auth-header'>
+          <h2>Welcome back</h2>
+          <p>Sign in to keep your spending on track.</p>
+        </div>
 
-        <input
-          type='email'
-          name='email'
-          placeholder='Email'
-          onChange={handleChange}
-        />
+        <div className='auth-fields'>
+          <label className='input-label' htmlFor='login-email'>
+            Email
+          </label>
+          <input
+            id='login-email'
+            type='email'
+            name='email'
+            placeholder='name@company.com'
+            onChange={handleChange}
+          />
 
-        <input
-          type='password'
-          name='password'
-          placeholder='Password'
-          onChange={handleChange}
-        />
+          <label className='input-label' htmlFor='login-password'>
+            Password
+          </label>
+          <input
+            id='login-password'
+            type='password'
+            name='password'
+            placeholder='Enter your password'
+            onChange={handleChange}
+          />
+        </div>
 
-        <button type='submit'>Login</button>
+        <div className='auth-actions'>
+          <button type='submit'>Login</button>
 
-        <p>
-          Don't have an account? <Link to='/register'>Register</Link>
-        </p>
+          <p>
+            Don't have an account? <Link to='/register'>Register</Link>
+          </p>
+        </div>
       </form>
     </div>
   );

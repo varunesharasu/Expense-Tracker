@@ -95,33 +95,49 @@ function TransactionForm({ fetchTransactions }) {
 
       {error && <div className='error-message'>{error}</div>}
 
-      <input
-        type='text'
-        name='title'
-        placeholder='Title *'
-        value={formData.title}
-        onChange={handleChange}
-        required
-      />
+      <p className='form-hint'>Fields marked with * are required.</p>
 
-      <input
-        type='number'
-        name='amount'
-        placeholder='Amount *'
-        value={formData.amount}
-        onChange={handleChange}
-        required
-      />
+      <div className='form-row'>
+        <input
+          type='text'
+          name='title'
+          placeholder='Title *'
+          value={formData.title}
+          onChange={handleChange}
+          required
+        />
 
-      <select name='category' value={formData.category === '' && customCategory ? 'others' : formData.category} onChange={handleCategoryChange} required>
-        <option value=''>Select Category *</option>
-        {categories.map((cat) => (
-          <option key={cat} value={cat}>
-            {cat}
-          </option>
-        ))}
-        <option value='others'>Others</option>
-      </select>
+        <input
+          type='number'
+          name='amount'
+          placeholder='Amount *'
+          value={formData.amount}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      <div className='form-row'>
+        <select
+          name='category'
+          value={formData.category === '' && customCategory ? 'others' : formData.category}
+          onChange={handleCategoryChange}
+          required
+        >
+          <option value=''>Select Category *</option>
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
+          <option value='others'>Others</option>
+        </select>
+
+        <select name='type' value={formData.type} onChange={handleChange}>
+          <option value='income'>Income</option>
+          <option value='expense'>Expense</option>
+        </select>
+      </div>
 
       {(formData.category === '' || customCategory) && (formData.category === 'others' || customCategory) && (
         <input
@@ -132,11 +148,6 @@ function TransactionForm({ fetchTransactions }) {
           required
         />
       )}
-
-      <select name='type' value={formData.type} onChange={handleChange}>
-        <option value='income'>Income</option>
-        <option value='expense'>Expense</option>
-      </select>
 
       <button type='submit' disabled={!isFormValid() || loading}>
         {loading ? 'Adding...' : 'Add'}

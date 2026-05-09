@@ -11,15 +11,62 @@
   animation: fadeUp 0.5s ease both;
 }
 
+.sidebar-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
 .sidebar h2 {
   color: var(--accent);
   font-size: 22px;
 }
 
+.sidebar-subtitle {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.status-pill {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #e6f7f1;
+  color: #0f766e;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.sidebar-card {
+  margin-top: 20px;
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--accent-soft-2);
+  border: 1px dashed rgba(31, 122, 106, 0.25);
+}
+
+.sidebar-card-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.sidebar-card-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent-strong);
+  margin-top: 6px;
+}
+
 .sidebar ul {
   list-style: none;
   padding: 0;
-  margin-top: 28px;
+  margin-top: 24px;
   display: grid;
   gap: 10px;
 }
@@ -33,9 +80,35 @@
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
+.sidebar li.active {
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
 .sidebar li:hover {
   background: var(--accent-soft);
   transform: translateX(2px);
+}
+
+.sidebar .nav-link {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  transition: background var(--transition), transform var(--transition), color var(--transition);
+}
+
+.sidebar .nav-link:hover {
+  background: var(--accent-soft);
+  transform: translateX(2px);
+}
+
+.sidebar .nav-link.active {
+  background: var(--accent-soft);
+  color: var(--accent-strong);
 }
 
 .sidebar button {

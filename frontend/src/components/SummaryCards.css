@@ -13,6 +13,7 @@
   position: relative;
   overflow: hidden;
   animation: fadeUp 0.5s ease both;
+  transition: transform var(--transition), box-shadow var(--transition);
 }
 
 .card::after {
@@ -22,6 +23,24 @@
   width: 140px;
   height: 140px;
   background: radial-gradient(circle, rgba(31, 122, 106, 0.18) 0%, transparent 60%);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(31, 122, 106, 0.08), transparent 45%);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+.card:hover::before {
+  opacity: 1;
 }
 
 .card:nth-child(1) {
@@ -34,6 +53,18 @@
 
 .card:nth-child(3) {
   border-left: 4px solid #f59e0b;
+}
+
+.balance-card p {
+  color: var(--accent-strong);
+}
+
+.income-card p {
+  color: #0f766e;
+}
+
+.expense-card p {
+  color: #b45309;
 }
 
 .card h3 {

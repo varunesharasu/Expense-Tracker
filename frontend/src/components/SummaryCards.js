@@ -14,17 +14,17 @@ function SummaryCards({ transactions }) {
 
   return (
     <div className='summary-cards'>
-      <div className='card'>
+      <div className='card balance-card'>
         <h3>Total Balance</h3>
         <p>${balance}</p>
       </div>
 
-      <div className='card'>
+      <div className='card income-card'>
         <h3>Total Income</h3>
         <p>${income}</p>
       </div>
 
-      <div className='card'>
+      <div className='card expense-card'>
         <h3>Total Expense</h3>
         <p>${expense}</p>
       </div>

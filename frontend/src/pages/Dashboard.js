@@ -35,15 +35,45 @@ function Dashboard() {
             <h1>Welcome back</h1>
             <p>Track your cashflow with live insights.</p>
           </div>
-          <div className='dashboard-chip'>Live Overview</div>
+          <div className='chip'>Live Overview</div>
+        </div>
+
+        <div className='section-row'>
+          <div>
+            <h3 className='section-title'>Overview</h3>
+            <p className='section-subtitle'>Your balances and recent flow.</p>
+          </div>
+          <div className='section-actions'>
+            <span className='chip'>Synced</span>
+          </div>
         </div>
 
         <SummaryCards transactions={transactions} />
+
+        <div className='section-row'>
+          <div>
+            <h3 className='section-title'>New transaction</h3>
+            <p className='section-subtitle'>Add income or expenses in seconds.</p>
+          </div>
+          <div className='section-actions'>
+            <span className='chip alt'>Live</span>
+          </div>
+        </div>
 
         <div className='dashboard-main'>
           <TransactionForm fetchTransactions={fetchTransactions} />
 
           <ExpenseChart transactions={transactions} />
+        </div>
+
+        <div className='section-row'>
+          <div>
+            <h3 className='section-title'>Recent activity</h3>
+            <p className='section-subtitle'>Review and manage your entries.</p>
+          </div>
+          <div className='section-actions'>
+            <span className='chip outline'>Updated now</span>
+          </div>
         </div>
 
         <TransactionList

@@ -17,13 +17,16 @@ function TransactionList({ transactions, fetchTransactions }) {
       ) : (
         transactions.map((item) => (
           <div className='transaction-item' key={item._id}>
-            <div>
+            <div className='transaction-meta'>
               <h4>{item.title}</h4>
-              <p>{item.category}</p>
+              <div className='transaction-tags'>
+                <span className='transaction-tag'>{item.category}</span>
+                <span className={`transaction-tag ${item.type}`}>{item.type}</span>
+              </div>
             </div>
 
-            <div>
-              <span>${item.amount}</span>
+            <div className='transaction-actions'>
+              <span className='transaction-amount'>${item.amount}</span>
               <button onClick={() => deleteTransaction(item._id)}>
                 Delete
               </button>

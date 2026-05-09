@@ -16,9 +16,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 0;
-  border-bottom: 1px solid var(--border);
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid transparent;
   animation: fadeUp 0.4s ease both;
+  transition: transform var(--transition), box-shadow var(--transition), border var(--transition);
+}
+
+.transaction-item + .transaction-item {
+  margin-top: 12px;
+}
+
+.transaction-item:hover {
+  transform: translateY(-2px);
+  border-color: rgba(31, 122, 106, 0.15);
+  box-shadow: var(--shadow-soft);
+  background: var(--surface-2);
 }
 
 .transaction-item h4 {
@@ -26,13 +39,47 @@
   margin-bottom: 4px;
 }
 
-.transaction-item p {
-  font-size: 13px;
+.transaction-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.transaction-item span {
+.transaction-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.transaction-tag {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--accent-soft-2);
+  color: var(--accent-strong);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.transaction-tag.income {
+  background: #e6f7f1;
+  color: #0f766e;
+}
+
+.transaction-tag.expense {
+  background: #fdf1e6;
+  color: #b45309;
+}
+
+.transaction-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.transaction-amount {
   font-weight: 700;
-  margin-right: 10px;
+  color: var(--text);
 }
 
 .transaction-item button {
@@ -60,4 +107,5 @@
   color: var(--accent);
   font-weight: 600;
   text-align: center;
+  animation: fadeUp 0.4s ease both;
 }

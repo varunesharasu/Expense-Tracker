@@ -8,10 +8,22 @@
   gap: 14px;
   box-shadow: var(--shadow-soft);
   animation: fadeUp 0.5s ease both;
+  backdrop-filter: blur(8px);
 }
 
 .transaction-form h2 {
   font-size: 22px;
+}
+
+.form-hint {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
 }
 
 .transaction-form input,
@@ -21,14 +33,19 @@
   border-radius: 12px;
   font-size: 14px;
   background: var(--surface-2);
-  transition: border 0.2s ease, box-shadow 0.2s ease;
+  transition: border var(--transition), box-shadow var(--transition), transform var(--transition);
+}
+
+.transaction-form input::placeholder {
+  color: #9aa2ac;
 }
 
 .transaction-form input:focus,
 .transaction-form select:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(31, 122, 106, 0.15);
+  box-shadow: var(--ring);
+  transform: translateY(-1px);
 }
 
 .transaction-form button {
@@ -41,11 +58,16 @@
   font-weight: 600;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 10px 18px rgba(31, 122, 106, 0.2);
+  width: 100%;
 }
 
 .transaction-form button:hover:not(:disabled) {
   transform: translateY(-1px);
   box-shadow: 0 12px 22px rgba(31, 122, 106, 0.28);
+}
+
+.transaction-form button:active {
+  transform: translateY(0px);
 }
 
 .transaction-form button:disabled {
@@ -61,4 +83,10 @@
   border: 1px solid #f3caca;
   border-radius: 10px;
   font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
 }

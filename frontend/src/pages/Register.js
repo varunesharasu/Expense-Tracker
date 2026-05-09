@@ -30,34 +30,53 @@ function Register() {
   return (
     <div className='register-container'>
       <form className='register-form' onSubmit={handleSubmit}>
-        <h2>Register</h2>
+        <div className='auth-header'>
+          <h2>Create account</h2>
+          <p>Start tracking your budget with clarity.</p>
+        </div>
 
-        <input
-          type='text'
-          name='name'
-          placeholder='Name'
-          onChange={handleChange}
-        />
+        <div className='auth-fields'>
+          <label className='input-label' htmlFor='register-name'>
+            Name
+          </label>
+          <input
+            id='register-name'
+            type='text'
+            name='name'
+            placeholder='Full name'
+            onChange={handleChange}
+          />
 
-        <input
-          type='email'
-          name='email'
-          placeholder='Email'
-          onChange={handleChange}
-        />
+          <label className='input-label' htmlFor='register-email'>
+            Email
+          </label>
+          <input
+            id='register-email'
+            type='email'
+            name='email'
+            placeholder='name@company.com'
+            onChange={handleChange}
+          />
 
-        <input
-          type='password'
-          name='password'
-          placeholder='Password'
-          onChange={handleChange}
-        />
+          <label className='input-label' htmlFor='register-password'>
+            Password
+          </label>
+          <input
+            id='register-password'
+            type='password'
+            name='password'
+            placeholder='Create a password'
+            onChange={handleChange}
+          />
+        </div>
 
-        <button type='submit'>Register</button>
+        <div className='auth-actions'>
+          <button type='submit'>Register</button>
 
-        <p>
-          Already have an account? <Link to='/'>Login</Link>
-        </p>
+          <p>
+            Already have an account? <Link to='/'>Login</Link>
+          </p>
+        </div>
       </form>
     </div>
   );

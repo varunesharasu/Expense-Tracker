@@ -33,7 +33,13 @@ function ExpenseChart({ transactions }) {
 
   return (
     <div className='chart-container'>
-      <h2>Expense Analysis</h2>
+      <div className='chart-header'>
+        <div>
+          <h2>Expense Analysis</h2>
+          <p className='chart-subtitle'>Breakdown by category.</p>
+        </div>
+        <span className='chip outline'>Realtime</span>
+      </div>
 
       <ResponsiveContainer width='100%' height={300}>
         <PieChart>
