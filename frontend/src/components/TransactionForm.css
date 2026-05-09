@@ -20,4 +20,24 @@
   color: white;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.transaction-form button:hover:not(:disabled) {
+  background: #4338ca;
+}
+
+.transaction-form button:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+}
+
+.error-message {
+  padding: 12px;
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+  border-radius: 5px;
+  font-size: 14px;
 }
