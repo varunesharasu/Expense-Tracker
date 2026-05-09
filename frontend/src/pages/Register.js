@@ -11,20 +11,32 @@ function Register() {
     email: '',
     password: ''
   });
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+    setError('');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await API.post('/auth/register', formData);
+    try {
+      const payload = {
+        name: formData.name.trim(),
+        email: formData.email.trim().toLowerCase(),
+        password: formData.password
+      };
 
-    navigate('/');
+      await API.post('/auth/register', payload);
+
+      navigate('/');
+    } catch (err) {
+      setError(err.response?.data?.message || 'Registration failed. Please try again.');
+    }
   };
 
   return (
@@ -34,6 +46,8 @@ function Register() {
           <h2>Create account</h2>
           <p>Start tracking your budget with clarity.</p>
         </div>
+
+        {error && <div className='auth-error'>{error}</div>}
 
         <div className='auth-fields'>
           <label className='input-label' htmlFor='register-name'>

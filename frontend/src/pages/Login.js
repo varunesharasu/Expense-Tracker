@@ -10,25 +10,36 @@ function Login() {
     email: '',
     password: ''
   });
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+    setError('');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await API.post('/auth/login', formData);
+    try {
+      const payload = {
+        email: formData.email.trim().toLowerCase(),
+        password: formData.password
+      };
 
-    localStorage.setItem('token', res.data.token);
-    if (res.data.user) {
-      localStorage.setItem('user', JSON.stringify(res.data.user));
+      const res = await API.post('/auth/login', payload);
+
+      localStorage.setItem('token', res.data.token);
+      if (res.data.user) {
+        localStorage.setItem('user', JSON.stringify(res.data.user));
+      }
+
+      navigate('/dashboard');
+    } catch (err) {
+      setError(err.response?.data?.message || 'Login failed. Please try again.');
     }
-
-    navigate('/dashboard');
   };
 
   return (
@@ -38,6 +49,8 @@ function Login() {
           <h2>Welcome back</h2>
           <p>Sign in to keep your spending on track.</p>
         </div>
+
+        {error && <div className='auth-error'>{error}</div>}
 
         <div className='auth-fields'>
           <label className='input-label' htmlFor='login-email'>

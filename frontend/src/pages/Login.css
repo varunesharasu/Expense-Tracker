@@ -55,6 +55,15 @@
   font-size: 14px;
 }
 
+.auth-error {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #fbe8e8;
+  color: #9b2c2c;
+  border: 1px solid #f3caca;
+  font-size: 13px;
+}
+
 .auth-fields {
   display: grid;
   gap: 10px;
