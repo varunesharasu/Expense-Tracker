@@ -1,43 +1,64 @@
 .transaction-form {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
+  background: var(--surface);
+  padding: 24px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 14px;
+  box-shadow: var(--shadow-soft);
+  animation: fadeUp 0.5s ease both;
+}
+
+.transaction-form h2 {
+  font-size: 22px;
 }
 
 .transaction-form input,
 .transaction-form select {
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 14px;
+  background: var(--surface-2);
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.transaction-form input:focus,
+.transaction-form select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(31, 122, 106, 0.15);
 }
 
 .transaction-form button {
-  padding: 12px;
-  background: #4f46e5;
+  padding: 12px 14px;
+  background: var(--accent);
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: background 0.2s;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 10px 18px rgba(31, 122, 106, 0.2);
 }
 
 .transaction-form button:hover:not(:disabled) {
-  background: #4338ca;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 22px rgba(31, 122, 106, 0.28);
 }
 
 .transaction-form button:disabled {
-  background: #d1d5db;
+  background: #c9d5d2;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
 .error-message {
-  padding: 12px;
-  background: #fee2e2;
-  color: #991b1b;
-  border: 1px solid #fecaca;
-  border-radius: 5px;
-  font-size: 14px;
+  padding: 10px 12px;
+  background: #fbe8e8;
+  color: #9b2c2c;
+  border: 1px solid #f3caca;
+  border-radius: 10px;
+  font-size: 13px;
 }

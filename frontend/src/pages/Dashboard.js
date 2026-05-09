@@ -30,6 +30,14 @@ function Dashboard() {
       <Sidebar />
 
       <div className='dashboard-content'>
+        <div className='dashboard-header'>
+          <div>
+            <h1>Welcome back</h1>
+            <p>Track your cashflow with live insights.</p>
+          </div>
+          <div className='dashboard-chip'>Live Overview</div>
+        </div>
+
         <SummaryCards transactions={transactions} />
 
         <div className='dashboard-main'>

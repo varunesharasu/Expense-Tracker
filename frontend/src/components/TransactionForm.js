@@ -9,8 +9,11 @@ function TransactionForm({ fetchTransactions }) {
     category: '',
     type: 'expense'
   });
+  const [customCategory, setCustomCategory] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const categories = ['Food', 'Transport', 'Entertainment', 'Utilities', 'Health', 'Shopping'];
 
   const handleChange = (e) => {
     setFormData({
@@ -20,8 +23,37 @@ function TransactionForm({ fetchTransactions }) {
     setError('');
   };
 
+  const handleCategoryChange = (e) => {
+    const value = e.target.value;
+    if (value === 'others') {
+      setFormData({
+        ...formData,
+        category: ''
+      });
+    } else {
+      setFormData({
+        ...formData,
+        category: value
+      });
+      setCustomCategory('');
+    }
+    setError('');
+  };
+
+  const handleCustomCategoryChange = (e) => {
+    setCustomCategory(e.target.value);
+    setFormData({
+      ...formData,
+      category: e.target.value
+    });
+    setError('');
+  };
+
   const isFormValid = () => {
-    return formData.title.trim() && formData.amount && formData.category.trim();
+    const categoryValid = formData.category === 'others' 
+      ? customCategory.trim() 
+      : formData.category.trim();
+    return formData.title.trim() && formData.amount && categoryValid;
   };
 
   const handleSubmit = async (e) => {
@@ -49,6 +81,7 @@ function TransactionForm({ fetchTransactions }) {
         category: '',
         type: 'expense'
       });
+      setCustomCategory('');
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to add transaction');
     } finally {
@@ -80,14 +113,25 @@ function TransactionForm({ fetchTransactions }) {
         required
       />
 
-      <input
-        type='text'
-        name='category'
-        placeholder='Category *'
-        value={formData.category}
-        onChange={handleChange}
-        required
-      />
+      <select name='category' value={formData.category === '' && customCategory ? 'others' : formData.category} onChange={handleCategoryChange} required>
+        <option value=''>Select Category *</option>
+        {categories.map((cat) => (
+          <option key={cat} value={cat}>
+            {cat}
+          </option>
+        ))}
+        <option value='others'>Others</option>
+      </select>
+
+      {(formData.category === '' || customCategory) && (formData.category === 'others' || customCategory) && (
+        <input
+          type='text'
+          placeholder='Enter custom category *'
+          value={customCategory}
+          onChange={handleCustomCategoryChange}
+          required
+        />
+      )}
 
       <select name='type' value={formData.type} onChange={handleChange}>
         <option value='income'>Income</option>

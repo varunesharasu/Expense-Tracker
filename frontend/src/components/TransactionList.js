@@ -12,21 +12,25 @@ function TransactionList({ transactions, fetchTransactions }) {
     <div className='transaction-list'>
       <h2>Transactions</h2>
 
-      {transactions.map((item) => (
-        <div className='transaction-item' key={item._id}>
-          <div>
-            <h4>{item.title}</h4>
-            <p>{item.category}</p>
-          </div>
+      {transactions.length === 0 ? (
+        <div className='empty-state'>No transactions yet.</div>
+      ) : (
+        transactions.map((item) => (
+          <div className='transaction-item' key={item._id}>
+            <div>
+              <h4>{item.title}</h4>
+              <p>{item.category}</p>
+            </div>
 
-          <div>
-            <span>${item.amount}</span>
-            <button onClick={() => deleteTransaction(item._id)}>
-              Delete
-            </button>
+            <div>
+              <span>${item.amount}</span>
+              <button onClick={() => deleteTransaction(item._id)}>
+                Delete
+              </button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      )}
     </div>
   );
 }
