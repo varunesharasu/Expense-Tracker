@@ -14,9 +14,19 @@ function ExpenseChart({ transactions }) {
     (item) => item.type === 'expense'
   );
 
-  const chartData = expenseData.map((item) => ({
-    name: item.category,
-    value: item.amount
+  const groupedData = {};
+
+  expenseData.forEach((item) => {
+    if (groupedData[item.category]) {
+      groupedData[item.category] += item.amount;
+    } else {
+      groupedData[item.category] = item.amount;
+    }
+  });
+
+  const chartData = Object.keys(groupedData).map((key) => ({
+    name: key,
+    value: groupedData[key]
   }));
 
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
@@ -32,6 +42,7 @@ function ExpenseChart({ transactions }) {
             cx='50%'
             cy='50%'
             outerRadius={100}
+            fill='#8884d8'
             dataKey='value'
             label
           >
