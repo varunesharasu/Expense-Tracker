@@ -201,40 +201,6 @@ function Reports() {
       }
     });
 
-    doc.addPage();
-    addHeader('Budgets (Expenses)', expenseTransactions.length);
-    doc.setFontSize(11);
-    doc.text('Expense entries', 14, 66);
-
-    autoTable(doc, {
-      startY: 70,
-      head: [['Title', 'Category', 'Amount', 'Balance Before', 'Balance After', 'Date']],
-      body: expenseTransactions.map((item, index) => {
-        const key = item._id || `${item.title}-${item.amount}-${item.type}-${item.date || item.createdAt || index}`;
-        const balances = runningBalances.map[key] || { before: 0, after: 0 };
-        return [
-          item.title,
-          item.category,
-          formatAmount(item.amount),
-          formatAmount(balances.before),
-          formatAmount(balances.after),
-          getDateLabel(item.date || item.createdAt)
-        ];
-      }),
-      styles: { fontSize: 8, textColor: [31, 41, 51], cellPadding: 2 },
-      headStyles: { fillColor: [243, 244, 246], textColor: [31, 41, 51] },
-      columnStyles: {
-        2: { halign: 'right' },
-        3: { halign: 'right' },
-        4: { halign: 'right' }
-      },
-      didParseCell: (data) => {
-        if (data.section === 'body' && data.column.index === 2) {
-          data.cell.styles.textColor = [220, 38, 38];
-        }
-      }
-    });
-
     doc.save('expense-report.pdf');
   };
 
