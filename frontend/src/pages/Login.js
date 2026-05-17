@@ -77,19 +77,6 @@ function Login() {
             <p className='auth-card-hint'>Pick up where you left off.</p>
           </div>
 
-          <div className='auth-socials'>
-            <button type='button' className='auth-social'>
-              <span className='auth-social-icon auth-social-google'>G</span>
-              Login with Google
-            </button>
-            <button type='button' className='auth-social'>
-              <span className='auth-social-icon auth-social-facebook'>f</span>
-              Login with Facebook
-            </button>
-          </div>
-
-          <div className='auth-divider'>or</div>
-
           {error && <div className='auth-error'>{error}</div>}
 
           <div className='auth-fields'>

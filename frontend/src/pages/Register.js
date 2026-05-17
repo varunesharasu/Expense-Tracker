@@ -74,19 +74,6 @@ function Register() {
             <p className='auth-card-hint'>Start tracking with clarity.</p>
           </div>
 
-          <div className='auth-socials'>
-            <button type='button' className='auth-social'>
-              <span className='auth-social-icon auth-social-google'>G</span>
-              Sign up with Google
-            </button>
-            <button type='button' className='auth-social'>
-              <span className='auth-social-icon auth-social-facebook'>f</span>
-              Sign up with Facebook
-            </button>
-          </div>
-
-          <div className='auth-divider'>or</div>
-
           {error && <div className='auth-error'>{error}</div>}
 
           <div className='auth-fields'>
