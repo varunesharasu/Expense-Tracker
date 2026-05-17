@@ -100,6 +100,14 @@ function Reports() {
     const pageWidth = doc.internal.pageSize.getWidth();
     const pageHeight = doc.internal.pageSize.getHeight();
     const marginX = 14;
+    const marginY = 12;
+    const contentWidth = pageWidth - marginX * 2;
+    const headerHeight = 28;
+    const metaHeight = 32;
+    const headerTop = marginY;
+    const footerY = pageHeight - marginY;
+    const bottomLimit = footerY - 12;
+    const newPageStartY = marginY + 20;
     const palette = {
       primary: [15, 118, 110],
       primaryDark: [13, 86, 83],
@@ -158,38 +166,36 @@ function Reports() {
       : 0;
 
     const addHeader = (title, recordCount) => {
-      const headerHeight = 28;
-      const metaHeight = 32;
       doc.setFillColor(...palette.primary);
-      doc.rect(0, 0, pageWidth, headerHeight, 'F');
+      doc.rect(marginX, headerTop, contentWidth, headerHeight, 'F');
       doc.setFillColor(...palette.primaryDark);
-      doc.rect(0, headerHeight - 3, pageWidth, 3, 'F');
+      doc.rect(marginX, headerTop + headerHeight - 3, contentWidth, 3, 'F');
       doc.setFillColor(...palette.accent);
-      doc.rect(pageWidth - 50, 0, 50, headerHeight, 'F');
+      doc.rect(marginX + contentWidth - 50, headerTop, 50, headerHeight, 'F');
       doc.setTextColor(255, 255, 255);
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(18);
-      doc.text('Expense Tracker', marginX, 18);
+      doc.text('Expense Tracker', marginX, headerTop + 18);
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(10);
-      doc.text(title, marginX, 24);
+      doc.text(title, marginX, headerTop + 24);
       doc.setFontSize(9);
-      doc.text(generatedLabel, pageWidth - marginX, 18, { align: 'right' });
+      doc.text(generatedLabel, pageWidth - marginX, headerTop + 18, { align: 'right' });
 
       doc.setFillColor(...palette.surface);
-      doc.rect(0, headerHeight, pageWidth, metaHeight, 'F');
+      doc.rect(marginX, headerTop + headerHeight, contentWidth, metaHeight, 'F');
       doc.setTextColor(...palette.text);
       doc.setFontSize(10);
-      doc.text(`Prepared for ${userName}`, marginX, headerHeight + 10);
-      doc.text(`Email: ${userEmail}`, marginX, headerHeight + 16);
-      doc.text(`Date range: ${reportRange}`, marginX, headerHeight + 22);
-      doc.text(`Records: ${recordCount}`, pageWidth - marginX, headerHeight + 22, { align: 'right' });
+      doc.text(`Prepared for ${userName}`, marginX, headerTop + headerHeight + 10);
+      doc.text(`Email: ${userEmail}`, marginX, headerTop + headerHeight + 16);
+      doc.text(`Date range: ${reportRange}`, marginX, headerTop + headerHeight + 22);
+      doc.text(`Records: ${recordCount}`, pageWidth - marginX, headerTop + headerHeight + 22, { align: 'right' });
       doc.setFontSize(9);
       doc.setTextColor(...palette.muted);
       doc.text(
         `Totals: Income ${formatAmount(totals.income)} | Expense ${formatAmount(totals.expense)} | Balance ${formatAmount(totals.balance)}`,
         marginX,
-        headerHeight + 28
+        headerTop + headerHeight + 28
       );
       doc.setTextColor(...palette.text);
     };
@@ -238,11 +244,11 @@ function Reports() {
     };
 
     addHeader('Expense Report', transactions.length);
-    let cursorY = drawMetricCards(66);
+    let cursorY = drawMetricCards(headerTop + headerHeight + metaHeight + 6);
     const ensureRoom = (minHeight) => {
-      if (cursorY + minHeight > pageHeight - 20) {
+      if (cursorY + minHeight > bottomLimit) {
         doc.addPage();
-        cursorY = 20;
+        cursorY = newPageStartY;
       }
     };
     const addSectionTitle = (label) => {
@@ -356,9 +362,9 @@ function Reports() {
     });
     cursorY = doc.lastAutoTable.finalY + 12;
 
-    if (cursorY > pageHeight - 120) {
+    if (cursorY > bottomLimit - 90) {
       doc.addPage();
-      cursorY = 20;
+      cursorY = newPageStartY;
     }
 
     doc.setFont('helvetica', 'bold');
@@ -403,7 +409,6 @@ function Reports() {
     const totalPages = doc.internal.getNumberOfPages();
     for (let page = 1; page <= totalPages; page += 1) {
       doc.setPage(page);
-      const footerY = pageHeight - 10;
       doc.setDrawColor(...palette.border);
       doc.setLineWidth(0.3);
       doc.line(marginX, footerY - 6, pageWidth - marginX, footerY - 6);
@@ -414,10 +419,10 @@ function Reports() {
 
       if (page > 1) {
         doc.setFillColor(...palette.surface);
-        doc.rect(0, 0, pageWidth, 12, 'F');
+        doc.rect(marginX, marginY, contentWidth, 12, 'F');
         doc.setFontSize(9);
         doc.setTextColor(...palette.muted);
-        doc.text('Expense Report', marginX, 8);
+        doc.text('Expense Report', marginX, marginY + 8);
       }
     }
 
