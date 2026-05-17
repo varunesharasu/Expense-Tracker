@@ -5,7 +5,7 @@
 }
 
 .card {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(250, 246, 241, 0.9));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(246, 237, 247, 0.9));
   padding: 22px;
   border-radius: var(--radius);
   border: 1px solid var(--border);
@@ -23,14 +23,14 @@
   inset: -50% 0 auto auto;
   width: 160px;
   height: 160px;
-  background: radial-gradient(circle, rgba(45, 106, 95, 0.16) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(131, 28, 145, 0.18) 0%, transparent 65%);
 }
 
 .card::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(45, 106, 95, 0.08), transparent 45%);
+  background: linear-gradient(135deg, rgba(131, 28, 145, 0.1), transparent 45%);
   opacity: 0;
   transition: opacity var(--transition);
 }
@@ -45,15 +45,15 @@
 }
 
 .card:nth-child(1) {
-  border-left: 4px solid #2d6a5f;
+  border-left: 4px solid #462C7D;
 }
 
 .card:nth-child(2) {
-  border-left: 4px solid #14b8a6;
+  border-left: 4px solid #831C91;
 }
 
 .card:nth-child(3) {
-  border-left: 4px solid #e07a2f;
+  border-left: 4px solid #D552A3;
 }
 
 .balance-card p {
@@ -61,11 +61,11 @@
 }
 
 .income-card p {
-  color: #0f766e;
+  color: #831C91;
 }
 
 .expense-card p {
-  color: #c2410c;
+  color: #D552A3;
 }
 
 .card h3 {

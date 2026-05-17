@@ -1,24 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
 
 :root {
-  --bg: #f5f1e7;
-  --bg-accent: #fff4e2;
+  --bg: #f7edf8;
+  --bg-accent: #f4e6f7;
   --surface: #ffffff;
-  --surface-2: #f7f2ea;
+  --surface-2: #f6edf7;
   --text: #1b1f24;
-  --muted: #6b7280;
-  --accent: #2d6a5f;
-  --accent-strong: #1f4b45;
-  --accent-2: #e07a2f;
-  --accent-2-strong: #9a3412;
-  --accent-soft: rgba(45, 106, 95, 0.16);
-  --accent-soft-2: rgba(45, 106, 95, 0.08);
-  --border: #e6dfd5;
+  --muted: #6c5a75;
+  --accent: #831C91;
+  --accent-strong: #462C7D;
+  --accent-2: #D552A3;
+  --accent-2-strong: #831C91;
+  --accent-soft: rgba(131, 28, 145, 0.16);
+  --accent-soft-2: rgba(213, 82, 163, 0.12);
+  --border: #ead6ef;
   --shadow: 0 18px 40px rgba(24, 32, 50, 0.12);
   --shadow-soft: 0 10px 24px rgba(24, 32, 50, 0.09);
   --shadow-strong: 0 24px 60px rgba(24, 32, 50, 0.18);
   --glass: rgba(255, 255, 255, 0.84);
-  --ring: 0 0 0 3px rgba(249, 115, 22, 0.22);
+  --ring: 0 0 0 3px rgba(255, 112, 191, 0.28);
   --radius-lg: 24px;
   --radius: 18px;
   --radius-sm: 12px;
@@ -40,9 +40,9 @@ body {
   font-family: 'DM Sans', 'Segoe UI', sans-serif;
   color: var(--text);
   background:
-    radial-gradient(1200px 700px at 10% -10%, rgba(45, 106, 95, 0.2), transparent 60%),
-    radial-gradient(900px 600px at 90% -5%, rgba(224, 122, 47, 0.2), transparent 60%),
-    linear-gradient(180deg, var(--bg-accent) 0%, var(--bg) 55%, #efe7da 100%);
+    radial-gradient(1200px 700px at 10% -10%, rgba(70, 44, 125, 0.22), transparent 60%),
+    radial-gradient(900px 600px at 90% -5%, rgba(131, 28, 145, 0.2), transparent 60%),
+    linear-gradient(180deg, var(--bg-accent) 0%, var(--bg) 55%, #f1e2f4 100%);
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
@@ -65,7 +65,7 @@ body::before {
   height: 520px;
   left: -180px;
   top: 80px;
-  background: radial-gradient(circle, rgba(45, 106, 95, 0.22), transparent 65%);
+  background: radial-gradient(circle, rgba(70, 44, 125, 0.24), transparent 65%);
 }
 
 body::after {
@@ -73,7 +73,7 @@ body::after {
   height: 460px;
   right: -160px;
   bottom: -140px;
-  background: radial-gradient(circle, rgba(224, 122, 47, 0.24), transparent 65%);
+  background: radial-gradient(circle, rgba(255, 112, 191, 0.24), transparent 65%);
   animation-delay: 4s;
 }
 
@@ -107,7 +107,7 @@ select {
 }
 
 ::selection {
-  background: rgba(45, 106, 95, 0.2);
+  background: rgba(131, 28, 145, 0.2);
 }
 
 @keyframes fadeUp {
@@ -123,10 +123,10 @@ select {
 
 @keyframes glowPulse {
   0% {
-    box-shadow: 0 0 0 rgba(45, 106, 95, 0.1);
+    box-shadow: 0 0 0 rgba(131, 28, 145, 0.12);
   }
   100% {
-    box-shadow: 0 0 22px rgba(45, 106, 95, 0.2);
+    box-shadow: 0 0 22px rgba(255, 112, 191, 0.24);
   }
 }
 

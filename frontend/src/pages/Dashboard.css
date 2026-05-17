@@ -29,7 +29,7 @@
   height: 420px;
   right: -140px;
   top: -180px;
-  background: radial-gradient(circle, rgba(20, 184, 166, 0.22), transparent 70%);
+  background: radial-gradient(circle, rgba(70, 44, 125, 0.22), transparent 70%);
   pointer-events: none;
 }
 
@@ -40,7 +40,7 @@
   height: 320px;
   left: -120px;
   bottom: -180px;
-  background: radial-gradient(circle, rgba(249, 115, 22, 0.18), transparent 70%);
+  background: radial-gradient(circle, rgba(213, 82, 163, 0.2), transparent 70%);
   pointer-events: none;
 }
 
@@ -77,7 +77,7 @@
   justify-content: space-between;
   gap: 16px;
   padding-top: 4px;
-  border-top: 1px dashed rgba(45, 106, 95, 0.18);
+  border-top: 1px dashed rgba(131, 28, 145, 0.2);
 }
 
 .section-title {
@@ -96,12 +96,12 @@
 }
 
 .chip {
-  background: linear-gradient(135deg, rgba(45, 106, 95, 0.16), rgba(45, 106, 95, 0.28));
+  background: linear-gradient(135deg, rgba(70, 44, 125, 0.2), rgba(131, 28, 145, 0.35));
   color: var(--accent-strong);
   font-weight: 600;
   padding: 8px 14px;
   border-radius: 999px;
-  border: 1px solid rgba(45, 106, 95, 0.25);
+  border: 1px solid rgba(131, 28, 145, 0.35);
   animation: glowPulse 2s ease-in-out infinite alternate;
   text-transform: uppercase;
   font-size: 11px;
@@ -109,16 +109,16 @@
 }
 
 .chip.alt {
-  background: rgba(224, 122, 47, 0.18);
-  color: #9a3412;
-  border-color: rgba(224, 122, 47, 0.35);
+  background: rgba(213, 82, 163, 0.2);
+  color: #831C91;
+  border-color: rgba(213, 82, 163, 0.4);
   animation: none;
 }
 
 .chip.outline {
   background: transparent;
   color: var(--accent-strong);
-  border-color: rgba(45, 106, 95, 0.3);
+  border-color: rgba(131, 28, 145, 0.35);
   animation: none;
 }
 
@@ -131,8 +131,8 @@
 
 .page-banner {
   position: relative;
-  background: linear-gradient(135deg, rgba(45, 106, 95, 0.16), rgba(224, 122, 47, 0.16));
-  border: 1px solid rgba(45, 106, 95, 0.2);
+  background: linear-gradient(135deg, rgba(70, 44, 125, 0.18), rgba(255, 112, 191, 0.2));
+  border: 1px solid rgba(131, 28, 145, 0.3);
   border-radius: var(--radius);
   padding: 20px 22px;
   display: flex;
@@ -182,9 +182,9 @@
 .page-alert {
   padding: 12px 14px;
   border-radius: 12px;
-  background: rgba(248, 113, 113, 0.16);
-  color: #b91c1c;
-  border: 1px solid rgba(248, 113, 113, 0.3);
+  background: rgba(255, 112, 191, 0.2);
+  color: #831C91;
+  border: 1px solid rgba(213, 82, 163, 0.4);
   font-size: 14px;
 }
 
@@ -198,28 +198,28 @@
   padding: 10px 14px;
   border-radius: 12px;
   border: none;
-  background: linear-gradient(135deg, #2d6a5f, #1f4b45);
+  background: linear-gradient(135deg, #462C7D, #831C91);
   color: white;
   font-weight: 600;
   cursor: pointer;
   transition: transform var(--transition), box-shadow var(--transition);
-  box-shadow: 0 10px 20px rgba(45, 106, 95, 0.25);
+  box-shadow: 0 10px 20px rgba(70, 44, 125, 0.28);
 }
 
 .report-button:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 14px 26px rgba(45, 106, 95, 0.3);
+  box-shadow: 0 14px 26px rgba(70, 44, 125, 0.35);
 }
 
 .report-button:disabled {
-  background: #cdd7d2;
+  background: #e6d7ef;
   cursor: not-allowed;
   box-shadow: none;
 }
 
 .report-button.outline {
   background: transparent;
-  border: 1px solid rgba(45, 106, 95, 0.35);
+  border: 1px solid rgba(131, 28, 145, 0.45);
   color: var(--accent-strong);
   box-shadow: none;
 }

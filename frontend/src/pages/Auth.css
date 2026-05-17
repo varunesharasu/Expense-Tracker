@@ -14,7 +14,7 @@
   width: 520px;
   height: 520px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(45, 106, 95, 0.2), transparent 65%);
+  background: radial-gradient(circle, rgba(70, 44, 125, 0.2), transparent 65%);
   top: -220px;
   left: -160px;
   z-index: 0;
@@ -26,7 +26,7 @@
   width: 460px;
   height: 460px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(249, 115, 22, 0.18), transparent 70%);
+  background: radial-gradient(circle, rgba(255, 112, 191, 0.22), transparent 70%);
   bottom: -200px;
   right: -160px;
   z-index: 0;
@@ -46,7 +46,7 @@
   position: relative;
   padding: 42px;
   border-radius: 32px;
-  background: linear-gradient(140deg, rgba(255, 255, 255, 0.94), rgba(246, 240, 232, 0.92));
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.94), rgba(246, 236, 247, 0.92));
   border: 1px solid rgba(255, 255, 255, 0.85);
   box-shadow: var(--shadow);
   overflow: hidden;
@@ -59,7 +59,7 @@
   width: 220px;
   height: 220px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(45, 106, 95, 0.18), transparent 70%);
+  background: radial-gradient(circle, rgba(70, 44, 125, 0.2), transparent 70%);
   top: -60px;
   right: -90px;
 }
@@ -70,7 +70,7 @@
   width: 180px;
   height: 180px;
   border-radius: 40px;
-  background: linear-gradient(135deg, rgba(249, 115, 22, 0.16), transparent 60%);
+  background: linear-gradient(135deg, rgba(213, 82, 163, 0.2), transparent 60%);
   bottom: -80px;
   left: -60px;
   transform: rotate(-8deg);
@@ -82,7 +82,7 @@
   gap: 8px;
   padding: 6px 12px;
   border-radius: 999px;
-  background: rgba(45, 106, 95, 0.12);
+  background: rgba(131, 28, 145, 0.16);
   color: var(--accent-strong);
   font-size: 11px;
   font-weight: 700;
@@ -106,8 +106,8 @@
   margin-top: 24px;
   padding: 18px;
   border-radius: 26px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(236, 231, 224, 0.85));
-  border: 1px solid rgba(45, 106, 95, 0.12);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(240, 229, 244, 0.88));
+  border: 1px solid rgba(131, 28, 145, 0.18);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -131,7 +131,7 @@
 
 .auth-note {
   background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(45, 106, 95, 0.16);
+  border: 1px solid rgba(131, 28, 145, 0.2);
   border-radius: 14px;
   padding: 12px;
   box-shadow: var(--shadow-soft);
@@ -157,7 +157,7 @@
   padding: 36px;
   border-radius: 24px;
   background: #ffffff;
-  border: 1px solid rgba(229, 223, 213, 0.92);
+  border: 1px solid rgba(234, 214, 239, 0.92);
   box-shadow: var(--shadow-strong);
   display: flex;
   flex-direction: column;
@@ -173,7 +173,7 @@
   width: 160px;
   height: 160px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(45, 106, 95, 0.12), transparent 70%);
+  background: radial-gradient(circle, rgba(131, 28, 145, 0.16), transparent 70%);
   top: -70px;
   right: -60px;
   pointer-events: none;
@@ -228,7 +228,7 @@
   padding: 10px 12px;
   border-radius: 14px;
   background: #ffffff;
-  border: 1px solid rgba(229, 223, 213, 0.92);
+  border: 1px solid rgba(234, 214, 239, 0.92);
   font-weight: 600;
   color: var(--text);
   cursor: pointer;
@@ -238,7 +238,7 @@
 
 .auth-social:hover {
   transform: translateY(-1px);
-  border-color: rgba(45, 106, 95, 0.3);
+  border-color: rgba(131, 28, 145, 0.35);
   box-shadow: 0 12px 22px rgba(24, 32, 50, 0.12);
 }
 
@@ -255,11 +255,11 @@
 }
 
 .auth-social-google {
-  background: linear-gradient(135deg, #f97316, #fbbf24);
+  background: linear-gradient(135deg, #FF70BF, #D552A3);
 }
 
 .auth-social-facebook {
-  background: linear-gradient(135deg, #2563eb, #1e40af);
+  background: linear-gradient(135deg, #462C7D, #831C91);
 }
 
 .auth-divider {
@@ -278,15 +278,15 @@
   content: '';
   flex: 1;
   height: 1px;
-  background: rgba(229, 223, 213, 0.85);
+  background: rgba(234, 214, 239, 0.85);
 }
 
 .auth-error {
   padding: 10px 12px;
   border-radius: 10px;
-  background: rgba(248, 113, 113, 0.16);
-  color: #b91c1c;
-  border: 1px solid rgba(248, 113, 113, 0.3);
+  background: rgba(255, 112, 191, 0.18);
+  color: #831C91;
+  border: 1px solid rgba(213, 82, 163, 0.4);
   font-size: 13px;
 }
 
@@ -309,13 +309,13 @@
   gap: 10px;
   padding: 8px 12px;
   border-radius: 14px;
-  border: 1px solid rgba(229, 223, 213, 0.96);
-  background: #f7f3ec;
+  border: 1px solid rgba(234, 214, 239, 0.96);
+  background: #f6edf7;
   transition: border var(--transition), box-shadow var(--transition), background var(--transition);
 }
 
 .auth-input:focus-within {
-  border-color: rgba(45, 106, 95, 0.4);
+  border-color: rgba(131, 28, 145, 0.4);
   box-shadow: var(--ring);
   background: #ffffff;
 }
@@ -337,7 +337,7 @@
   height: 34px;
   border-radius: 10px;
   background: #ffffff;
-  border: 1px solid rgba(229, 223, 213, 0.9);
+  border: 1px solid rgba(234, 214, 239, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -381,17 +381,17 @@
   padding: 12px 16px;
   border-radius: 14px;
   border: none;
-  background: linear-gradient(135deg, #2d6a5f, #1f4b45);
+  background: linear-gradient(135deg, #462C7D, #831C91);
   color: #ffffff;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 12px 20px rgba(45, 106, 95, 0.25);
+  box-shadow: 0 12px 20px rgba(70, 44, 125, 0.3);
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
 .auth-submit:hover {
   transform: translateY(-1px);
-  box-shadow: 0 16px 28px rgba(45, 106, 95, 0.3);
+  box-shadow: 0 16px 28px rgba(131, 28, 145, 0.35);
 }
 
 .auth-footer {

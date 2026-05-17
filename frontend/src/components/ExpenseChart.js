@@ -29,7 +29,7 @@ function ExpenseChart({ transactions }) {
     value: groupedData[key]
   }));
 
-  const COLORS = ['#2d6a5f', '#14b8a6', '#e07a2f', '#f3c35a'];
+  const COLORS = ['#462C7D', '#831C91', '#D552A3', '#FF70BF'];
 
   return (
     <div className='chart-container'>
