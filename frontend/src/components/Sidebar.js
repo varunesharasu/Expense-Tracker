@@ -1,7 +1,7 @@
 import React from 'react';
 import './Sidebar.css';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { VscAccount, VscArchive, VscHome, VscSettingsGear } from 'react-icons/vsc';
+import { VscAccount, VscArchive, VscHome, VscSettingsGear, VscSignOut } from 'react-icons/vsc';
 import Dock from './Dock';
 
 function Sidebar() {
@@ -20,12 +20,20 @@ function Sidebar() {
     { label: 'Reports', icon: <VscSettingsGear size={18} />, to: '/reports' }
   ];
 
-  const dockItems = navItems.map((item) => ({
-    icon: item.icon,
-    label: item.label,
-    onClick: () => navigate(item.to),
-    className: location.pathname === item.to ? 'is-active' : ''
-  }));
+  const dockItems = [
+    ...navItems.map((item) => ({
+      icon: item.icon,
+      label: item.label,
+      onClick: () => navigate(item.to),
+      className: location.pathname === item.to ? 'is-active' : ''
+    })),
+    {
+      icon: <VscSignOut size={18} />,
+      label: 'Logout',
+      onClick: logout,
+      className: 'is-danger'
+    }
+  ];
 
   return (
     <div className='nav-dock'>
@@ -34,9 +42,6 @@ function Sidebar() {
           <p className='nav-dock-title'>Expense Tracker</p>
           <p className='nav-dock-subtitle'>Realtime finance workspace</p>
         </div>
-        <button className='nav-dock-logout' onClick={logout}>
-          Logout
-        </button>
       </div>
 
       <Dock
