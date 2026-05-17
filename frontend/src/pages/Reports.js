@@ -104,6 +104,10 @@ function Reports() {
     const contentWidth = pageWidth - marginX * 2;
     const headerHeight = 28;
     const metaHeight = 32;
+    const borderInset = 4;
+    const borderRadius = 6;
+    const borderOffsetX = marginX - borderInset;
+    const borderOffsetY = marginY - borderInset;
     const headerTop = marginY;
     const footerY = pageHeight - marginY;
     const bottomLimit = footerY - 12;
@@ -409,6 +413,59 @@ function Reports() {
     const totalPages = doc.internal.getNumberOfPages();
     for (let page = 1; page <= totalPages; page += 1) {
       doc.setPage(page);
+      const borderWidth = pageWidth - borderOffsetX * 2;
+      const borderHeight = pageHeight - borderOffsetY * 2;
+      const innerInset = 3;
+      const accentSize = 6;
+
+      doc.setDrawColor(...palette.border);
+      doc.setLineWidth(0.6);
+      doc.setLineDash([4, 3], 0);
+      doc.roundedRect(
+        borderOffsetX,
+        borderOffsetY,
+        borderWidth,
+        borderHeight,
+        borderRadius,
+        borderRadius
+      );
+      doc.setLineDash([]);
+      doc.setDrawColor(...palette.primaryDark);
+      doc.setLineWidth(0.4);
+      doc.roundedRect(
+        borderOffsetX + innerInset,
+        borderOffsetY + innerInset,
+        borderWidth - innerInset * 2,
+        borderHeight - innerInset * 2,
+        borderRadius - 2,
+        borderRadius - 2
+      );
+
+      doc.setFillColor(...palette.accent);
+      doc.rect(borderOffsetX + 2, borderOffsetY + 2, accentSize, accentSize, 'F');
+      doc.rect(
+        pageWidth - borderOffsetX - accentSize - 2,
+        pageHeight - borderOffsetY - accentSize - 2,
+        accentSize,
+        accentSize,
+        'F'
+      );
+      doc.setFillColor(...palette.primary);
+      doc.rect(
+        pageWidth - borderOffsetX - accentSize - 2,
+        borderOffsetY + 2,
+        accentSize,
+        accentSize,
+        'F'
+      );
+      doc.rect(
+        borderOffsetX + 2,
+        pageHeight - borderOffsetY - accentSize - 2,
+        accentSize,
+        accentSize,
+        'F'
+      );
+
       doc.setDrawColor(...palette.border);
       doc.setLineWidth(0.3);
       doc.line(marginX, footerY - 6, pageWidth - marginX, footerY - 6);
