@@ -16,6 +16,7 @@
 .transaction-form h2 {
   font-size: 24px;
   font-weight: 700;
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 .form-hint {
@@ -38,6 +39,7 @@
   background: rgba(246, 237, 247, 0.5);
   transition: all var(--transition);
   font-weight: 500;
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 .transaction-form input::placeholder {
