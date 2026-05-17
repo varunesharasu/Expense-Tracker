@@ -85,7 +85,7 @@ function Budgets() {
           <div className='page-card'>
             <h3>Total spent</h3>
             <p>
-              <DecryptedText text={`$${totalSpent.toFixed(2)}`} {...amountEffectProps} />
+              <DecryptedText text={`₹${totalSpent.toFixed(2)}`} {...amountEffectProps} />
             </p>
           </div>
           <div className='page-card'>

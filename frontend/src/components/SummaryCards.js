@@ -29,21 +29,21 @@ function SummaryCards({ transactions }) {
       <div className='card balance-card'>
         <h3>Total Balance</h3>
         <p>
-          <DecryptedText text={`$${balance}`} {...amountEffectProps} />
+          <DecryptedText text={`₹${balance}`} {...amountEffectProps} />
         </p>
       </div>
 
       <div className='card income-card'>
         <h3>Total Income</h3>
         <p>
-          <DecryptedText text={`$${income}`} {...amountEffectProps} />
+          <DecryptedText text={`₹${income}`} {...amountEffectProps} />
         </p>
       </div>
 
       <div className='card expense-card'>
         <h3>Total Expense</h3>
         <p>
-          <DecryptedText text={`$${expense}`} {...amountEffectProps} />
+          <DecryptedText text={`₹${expense}`} {...amountEffectProps} />
         </p>
       </div>
     </div>

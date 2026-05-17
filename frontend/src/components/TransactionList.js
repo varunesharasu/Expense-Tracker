@@ -44,7 +44,7 @@ function TransactionList({
             </div>
 
             <div className='transaction-actions'>
-              <DecryptedText text={`$${item.amount}`} {...amountEffectProps} />
+              <DecryptedText text={`₹${item.amount}`} {...amountEffectProps} />
               <button onClick={() => deleteTransaction(item._id)}>
                 Delete
               </button>
