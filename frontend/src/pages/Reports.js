@@ -35,6 +35,11 @@ function Reports() {
     [transactions]
   );
 
+  const incomeTransactions = useMemo(
+    () => transactions.filter((item) => item.type === 'income'),
+    [transactions]
+  );
+
   const transactionsSorted = useMemo(() => {
     return [...transactions].sort((a, b) => {
       const dateA = new Date(a.date || a.createdAt).getTime();
@@ -60,9 +65,7 @@ function Reports() {
   }, [transactionsSorted]);
 
   const totals = useMemo(() => {
-    const income = transactions
-      .filter((t) => t.type === 'income')
-      .reduce((acc, item) => acc + item.amount, 0);
+    const income = incomeTransactions.reduce((acc, item) => acc + item.amount, 0);
     const expense = expenseTransactions.reduce(
       (acc, item) => acc + item.amount,
       0
@@ -72,9 +75,10 @@ function Reports() {
       expense,
       balance: income - expense
     };
-  }, [transactions, expenseTransactions]);
+  }, [incomeTransactions, expenseTransactions]);
 
   const formatAmount = (value) => `$${Number(value || 0).toFixed(2)}`;
+  const formatPercent = (value) => `${(Number(value || 0) * 100).toFixed(1)}%`;
 
   const getDateLabel = (value) =>
     new Date(value || Date.now()).toLocaleDateString();
@@ -94,101 +98,251 @@ function Reports() {
 
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const marginX = 14;
+    const palette = {
+      primary: [15, 118, 110],
+      primaryDark: [13, 86, 83],
+      accent: [245, 158, 11],
+      surface: [248, 250, 252],
+      border: [226, 232, 240],
+      text: [31, 41, 55],
+      muted: [107, 114, 128],
+      success: [22, 163, 74],
+      danger: [220, 38, 38],
+      info: [59, 130, 246]
+    };
     const generatedLabel = `Generated: ${new Date().toLocaleString()}`;
     const reportRange = transactionsSorted.length
       ? `${getDateLabel(transactionsSorted[0].date || transactionsSorted[0].createdAt)} - ${getDateLabel(transactionsSorted[transactionsSorted.length - 1].date || transactionsSorted[transactionsSorted.length - 1].createdAt)}`
       : 'No entries';
     const userName = userInfo.name || 'Unknown user';
     const userEmail = userInfo.email || 'Email not available';
+    const totalTransactions = transactions.length;
+    const totalAbsolute = transactions.reduce(
+      (acc, item) => acc + Math.abs(item.amount || 0),
+      0
+    );
+    const averageAmount = totalTransactions ? totalAbsolute / totalTransactions : 0;
+    const balanceColor = totals.balance >= 0 ? palette.success : palette.danger;
+    const largestIncome = incomeTransactions.reduce((acc, item) => {
+      if (!acc || item.amount > acc.amount) {
+        return item;
+      }
+      return acc;
+    }, null);
+    const largestExpense = expenseTransactions.reduce((acc, item) => {
+      if (!acc || item.amount > acc.amount) {
+        return item;
+      }
+      return acc;
+    }, null);
+    const categoryTotals = expenseTransactions.reduce((acc, item) => {
+      const category = item.category || 'Uncategorized';
+      acc[category] = (acc[category] || 0) + item.amount;
+      return acc;
+    }, {});
+    const categoryRows = Object.entries(categoryTotals).sort((a, b) => b[1] - a[1]);
+    const topCategory = categoryRows[0];
+    const reportStart = transactionsSorted[0]
+      ? new Date(transactionsSorted[0].date || transactionsSorted[0].createdAt)
+      : null;
+    const reportEnd = transactionsSorted[transactionsSorted.length - 1]
+      ? new Date(
+          transactionsSorted[transactionsSorted.length - 1].date ||
+            transactionsSorted[transactionsSorted.length - 1].createdAt
+        )
+      : null;
+    const rangeDays = reportStart && reportEnd
+      ? Math.max(1, Math.ceil((reportEnd - reportStart) / (1000 * 60 * 60 * 24)) + 1)
+      : 0;
 
     const addHeader = (title, recordCount) => {
-      doc.setFillColor(31, 122, 106);
-      doc.rect(0, 0, pageWidth, 30, 'F');
+      const headerHeight = 28;
+      const metaHeight = 32;
+      doc.setFillColor(...palette.primary);
+      doc.rect(0, 0, pageWidth, headerHeight, 'F');
+      doc.setFillColor(...palette.primaryDark);
+      doc.rect(0, headerHeight - 3, pageWidth, 3, 'F');
+      doc.setFillColor(...palette.accent);
+      doc.rect(pageWidth - 50, 0, 50, headerHeight, 'F');
       doc.setTextColor(255, 255, 255);
+      doc.setFont('helvetica', 'bold');
       doc.setFontSize(18);
-      doc.text('Expense Tracker', 14, 18);
-      doc.setFontSize(11);
-      doc.text(title, 14, 26);
-      doc.setFontSize(9);
-      doc.text(generatedLabel, pageWidth - 14, 18, { align: 'right' });
-      doc.setTextColor(31, 41, 51);
+      doc.text('Expense Tracker', marginX, 18);
+      doc.setFont('helvetica', 'normal');
       doc.setFontSize(10);
-      doc.text(`User: ${userName}`, 14, 38);
-      doc.text(`Email: ${userEmail}`, 14, 44);
-      doc.text(`Date range: ${reportRange}`, 14, 50);
-      doc.text(`Records: ${recordCount}`, pageWidth - 14, 50, { align: 'right' });
+      doc.text(title, marginX, 24);
+      doc.setFontSize(9);
+      doc.text(generatedLabel, pageWidth - marginX, 18, { align: 'right' });
+
+      doc.setFillColor(...palette.surface);
+      doc.rect(0, headerHeight, pageWidth, metaHeight, 'F');
+      doc.setTextColor(...palette.text);
+      doc.setFontSize(10);
+      doc.text(`Prepared for ${userName}`, marginX, headerHeight + 10);
+      doc.text(`Email: ${userEmail}`, marginX, headerHeight + 16);
+      doc.text(`Date range: ${reportRange}`, marginX, headerHeight + 22);
+      doc.text(`Records: ${recordCount}`, pageWidth - marginX, headerHeight + 22, { align: 'right' });
+      doc.setFontSize(9);
+      doc.setTextColor(...palette.muted);
       doc.text(
         `Totals: Income ${formatAmount(totals.income)} | Expense ${formatAmount(totals.expense)} | Balance ${formatAmount(totals.balance)}`,
-        14,
-        56
+        marginX,
+        headerHeight + 28
       );
+      doc.setTextColor(...palette.text);
+    };
+
+    const drawMetricCards = (startY) => {
+      const cardGap = 6;
+      const cardWidth = (pageWidth - marginX * 2 - cardGap) / 2;
+      const cardHeight = 20;
+      const cards = [
+        { label: 'Total income', value: formatAmount(totals.income), color: palette.success },
+        { label: 'Total expense', value: formatAmount(totals.expense), color: palette.danger },
+        { label: 'Net balance', value: formatAmount(totals.balance), color: balanceColor },
+        { label: 'Records', value: `${totalTransactions}`, color: palette.info }
+      ];
+
+      cards.forEach((card, index) => {
+        const col = index % 2;
+        const row = Math.floor(index / 2);
+        const x = marginX + col * (cardWidth + cardGap);
+        const y = startY + row * (cardHeight + cardGap);
+        doc.setFillColor(...palette.surface);
+        doc.rect(x, y, cardWidth, cardHeight, 'F');
+        doc.setDrawColor(...palette.border);
+        doc.setLineWidth(0.3);
+        doc.rect(x, y, cardWidth, cardHeight);
+        doc.setFillColor(...card.color);
+        doc.rect(x, y, 3, cardHeight, 'F');
+        doc.setFontSize(8);
+        doc.setTextColor(...palette.muted);
+        doc.text(card.label, x + 6, y + 7);
+        doc.setFontSize(12);
+        doc.setTextColor(...card.color);
+        doc.text(card.value, x + 6, y + 15);
+      });
+
+      return startY + cardHeight * 2 + cardGap + 8;
     };
 
     const setTypeColor = (type, cell) => {
       if (type === 'income') {
-        cell.styles.textColor = [22, 163, 74];
+        cell.styles.textColor = palette.success;
       }
       if (type === 'expense') {
-        cell.styles.textColor = [220, 38, 38];
+        cell.styles.textColor = palette.danger;
       }
     };
 
     addHeader('Expense Report', transactions.length);
-    doc.setFontSize(11);
-    doc.text('Summary', 14, 66);
-
-    autoTable(doc, {
-      startY: 70,
-      head: [['Metric', 'Value']],
-      body: [
-        ['Total transactions', transactions.length],
-        ['Total income', formatAmount(totals.income)],
-        ['Total expense', formatAmount(totals.expense)],
-        ['Balance', formatAmount(totals.balance)]
-      ],
-      styles: { fontSize: 9, textColor: [31, 41, 51], cellPadding: 3 },
-      headStyles: { fillColor: [243, 244, 246], textColor: [31, 41, 51] },
-      didParseCell: (data) => {
-        if (data.section !== 'body') {
-          return;
-        }
-
-        const label = data.row.raw[0];
-        if (label === 'Total income' && data.column.index === 1) {
-          data.cell.styles.textColor = [22, 163, 74];
-        }
-        if (label === 'Total expense' && data.column.index === 1) {
-          data.cell.styles.textColor = [220, 38, 38];
-        }
-        if (label === 'Balance' && data.column.index === 1) {
-          data.cell.styles.textColor = totals.balance >= 0 ? [22, 163, 74] : [220, 38, 38];
-        }
+    let cursorY = drawMetricCards(66);
+    const ensureRoom = (minHeight) => {
+      if (cursorY + minHeight > pageHeight - 20) {
+        doc.addPage();
+        cursorY = 20;
       }
-    });
+    };
+    const addSectionTitle = (label) => {
+      ensureRoom(16);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(11);
+      doc.setTextColor(...palette.text);
+      doc.text(label, marginX, cursorY);
+      doc.setDrawColor(...palette.border);
+      doc.setLineWidth(0.3);
+      doc.line(marginX, cursorY + 2, pageWidth - marginX, cursorY + 2);
+      doc.setFont('helvetica', 'normal');
+      cursorY += 6;
+    };
 
-    const transactionsStart = doc.lastAutoTable.finalY + 10;
-    doc.setFontSize(11);
-    doc.text('Transactions', 14, transactionsStart);
+    const keyInsights = [
+      ['Income transactions', `${incomeTransactions.length}`],
+      ['Expense transactions', `${expenseTransactions.length}`],
+      ['Average transaction size', formatAmount(averageAmount)],
+      [
+        'Average daily expense',
+        rangeDays ? formatAmount(totals.expense / rangeDays) : 'N/A'
+      ],
+      [
+        'Largest income',
+        largestIncome
+          ? `${largestIncome.title || 'Untitled'} (${formatAmount(largestIncome.amount)})`
+          : 'N/A'
+      ],
+      [
+        'Largest expense',
+        largestExpense
+          ? `${largestExpense.title || 'Untitled'} (${formatAmount(largestExpense.amount)})`
+          : 'N/A'
+      ],
+      [
+        'Top expense category',
+        topCategory
+          ? `${topCategory[0]} (${formatPercent(topCategory[1] / totals.expense)})`
+          : 'N/A'
+      ],
+      [
+        'Savings rate',
+        totals.income ? formatPercent(totals.balance / totals.income) : 'N/A'
+      ]
+    ];
 
+    addSectionTitle('Key insights');
     autoTable(doc, {
-      startY: transactionsStart + 4,
-      head: [['Title', 'Category', 'Type', 'Amount', 'Balance Before', 'Balance After', 'Date']],
-      body: runningBalances.rows.map((row) => [
-        row.item.title,
-        row.item.category,
-        row.item.type,
-        formatAmount(row.item.amount),
-        formatAmount(row.before),
-        formatAmount(row.after),
-        getDateLabel(row.item.date || row.item.createdAt)
-      ]),
-      styles: { fontSize: 8, textColor: [31, 41, 51], cellPadding: 2 },
-      headStyles: { fillColor: [243, 244, 246], textColor: [31, 41, 51] },
-      columnStyles: {
-        3: { halign: 'right' },
-        4: { halign: 'right' },
-        5: { halign: 'right' }
-      },
+      startY: cursorY,
+      head: [['Insight', 'Value']],
+      body: keyInsights,
+      styles: { fontSize: 9, textColor: palette.text, cellPadding: 3 },
+      headStyles: { fillColor: palette.surface, textColor: palette.text },
+      alternateRowStyles: { fillColor: [255, 255, 255] },
+      columnStyles: { 1: { halign: 'right' } },
+      margin: { left: marginX, right: marginX, top: 18 }
+    });
+    cursorY = doc.lastAutoTable.finalY + 10;
+
+    const categoryData = categoryRows.length
+      ? categoryRows.slice(0, 6).map(([category, amount]) => [
+          category,
+          formatAmount(amount),
+          totals.expense ? formatPercent(amount / totals.expense) : '0.0%'
+        ])
+      : [['No expense data', 'N/A', 'N/A']];
+
+    addSectionTitle('Category breakdown');
+    autoTable(doc, {
+      startY: cursorY,
+      head: [['Category', 'Total spend', 'Share of expenses']],
+      body: categoryData,
+      styles: { fontSize: 9, textColor: palette.text, cellPadding: 3 },
+      headStyles: { fillColor: palette.surface, textColor: palette.text },
+      columnStyles: { 1: { halign: 'right' }, 2: { halign: 'right' } },
+      margin: { left: marginX, right: marginX, top: 18 }
+    });
+    cursorY = doc.lastAutoTable.finalY + 10;
+
+    const topTransactions = [...transactions]
+      .sort((a, b) => Math.abs(b.amount) - Math.abs(a.amount))
+      .slice(0, 8)
+      .map((item) => [
+        item.title || 'Untitled',
+        item.category || 'Uncategorized',
+        item.type,
+        formatAmount(item.amount),
+        getDateLabel(item.date || item.createdAt)
+      ]);
+
+    addSectionTitle('Top transactions');
+    autoTable(doc, {
+      startY: cursorY,
+      head: [['Title', 'Category', 'Type', 'Amount', 'Date']],
+      body: topTransactions,
+      styles: { fontSize: 9, textColor: palette.text, cellPadding: 3 },
+      headStyles: { fillColor: palette.surface, textColor: palette.text },
+      columnStyles: { 3: { halign: 'right' } },
+      margin: { left: marginX, right: marginX, top: 18 },
       didParseCell: (data) => {
         if (data.section !== 'body') {
           return;
@@ -200,6 +354,72 @@ function Reports() {
         }
       }
     });
+    cursorY = doc.lastAutoTable.finalY + 12;
+
+    if (cursorY > pageHeight - 120) {
+      doc.addPage();
+      cursorY = 20;
+    }
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.setTextColor(...palette.text);
+    doc.text('All transactions', marginX, cursorY);
+    doc.setFont('helvetica', 'normal');
+    cursorY += 6;
+
+    autoTable(doc, {
+      startY: cursorY,
+      head: [['Title', 'Category', 'Type', 'Amount', 'Balance Before', 'Balance After', 'Date']],
+      body: runningBalances.rows.map((row) => [
+        row.item.title || 'Untitled',
+        row.item.category || 'Uncategorized',
+        row.item.type,
+        formatAmount(row.item.amount),
+        formatAmount(row.before),
+        formatAmount(row.after),
+        getDateLabel(row.item.date || row.item.createdAt)
+      ]),
+      styles: { fontSize: 8, textColor: palette.text, cellPadding: 2 },
+      headStyles: { fillColor: palette.surface, textColor: palette.text },
+      columnStyles: {
+        3: { halign: 'right' },
+        4: { halign: 'right' },
+        5: { halign: 'right' }
+      },
+      margin: { left: marginX, right: marginX, top: 18 },
+      didParseCell: (data) => {
+        if (data.section !== 'body') {
+          return;
+        }
+
+        const rowType = data.row.raw[2];
+        if (data.column.index === 2 || data.column.index === 3) {
+          setTypeColor(rowType, data.cell);
+        }
+      }
+    });
+
+    const totalPages = doc.internal.getNumberOfPages();
+    for (let page = 1; page <= totalPages; page += 1) {
+      doc.setPage(page);
+      const footerY = pageHeight - 10;
+      doc.setDrawColor(...palette.border);
+      doc.setLineWidth(0.3);
+      doc.line(marginX, footerY - 6, pageWidth - marginX, footerY - 6);
+      doc.setFontSize(8);
+      doc.setTextColor(...palette.muted);
+      doc.text('Expense Tracker Report', marginX, footerY);
+      doc.text(`Page ${page} of ${totalPages}`, pageWidth - marginX, footerY, { align: 'right' });
+
+      if (page > 1) {
+        doc.setFillColor(...palette.surface);
+        doc.rect(0, 0, pageWidth, 12, 'F');
+        doc.setFontSize(9);
+        doc.setTextColor(...palette.muted);
+        doc.text('Expense Report', marginX, 8);
+      }
+    }
 
     doc.save('expense-report.pdf');
   };
