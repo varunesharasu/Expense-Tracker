@@ -17,6 +17,7 @@
   border: 1px solid rgba(213, 82, 163, 0.45);
   box-shadow: 0 14px 30px rgba(70, 44, 125, 0.35);
   overflow: visible;
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 .dock-panel::before {
@@ -78,6 +79,8 @@
   color: #f8fafc;
   letter-spacing: 0.3px;
   transform: translateX(-50%);
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-weight: 600;
 }
 
 .dock-label::after {

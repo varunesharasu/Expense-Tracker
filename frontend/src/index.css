@@ -37,7 +37,7 @@ html {
 
 body {
   margin: 0;
-  font-family: 'DM Sans', 'Segoe UI', sans-serif;
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
   color: var(--text);
   background:
     radial-gradient(1200px 700px at 10% -10%, rgba(70, 44, 125, 0.22), transparent 60%),
@@ -81,19 +81,21 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: 'Playfair Display', 'Times New Roman', serif;
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
   letter-spacing: 0.2px;
 }
 
 p {
   color: var(--muted);
   line-height: 1.6;
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 a {
   color: var(--accent-strong);
   text-decoration: none;
   font-weight: 600;
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 a:hover {
@@ -102,8 +104,9 @@ a:hover {
 
 button,
 input,
-select {
-  font-family: inherit;
+select,
+textarea {
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 ::selection {

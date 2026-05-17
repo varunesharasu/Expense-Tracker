@@ -6,6 +6,7 @@
   padding: 64px 24px;
   position: relative;
   overflow: hidden;
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 .auth-shell::before {
@@ -88,6 +89,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 .auth-hero h1 {
@@ -96,12 +98,15 @@
   color: var(--text);
   font-weight: 800;
   line-height: 1.2;
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 .auth-hero p {
   margin-top: 10px;
   font-size: 15px;
   max-width: 420px;
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-weight: 500;
 }
 
 .auth-hero-art {
@@ -144,6 +149,8 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--muted);
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-weight: 700;
 }
 
 .auth-note-value {
@@ -152,6 +159,7 @@
   font-size: 14px;
   font-weight: 600;
   color: var(--accent-strong);
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 .auth-card {
@@ -167,6 +175,7 @@
   overflow: hidden;
   animation: fadeUp 0.7s ease both;
   animation-delay: 0.1s;
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 .auth-card::before {
@@ -205,6 +214,7 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--accent-strong);
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 .auth-card h2 {
@@ -217,6 +227,8 @@
 .auth-card-hint {
   font-size: 14px;
   color: var(--muted);
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-weight: 500;
 }
 
 .auth-socials {
@@ -238,6 +250,7 @@
   cursor: pointer;
   box-shadow: var(--shadow-soft);
   transition: transform var(--transition), box-shadow var(--transition), border var(--transition);
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 .auth-social:hover {
@@ -275,6 +288,7 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--muted);
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 .auth-divider::before,
@@ -292,6 +306,8 @@
   color: #831C91;
   border: 1px solid rgba(213, 82, 163, 0.4);
   font-size: 13px;
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-weight: 600;
 }
 
 .auth-fields {
@@ -305,6 +321,7 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--muted);
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 .auth-input {
@@ -316,6 +333,7 @@
   border: 1px solid rgba(234, 214, 239, 0.9);
   background: rgba(246, 237, 247, 0.5);
   transition: all var(--transition);
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 .auth-input:focus-within {
@@ -366,6 +384,8 @@
   align-items: center;
   gap: 8px;
   font-size: 13px;
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-weight: 500;
 }
 
 .auth-check input {
@@ -381,6 +401,7 @@
   font-weight: 600;
   cursor: pointer;
   padding: 0;
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 .auth-submit {
@@ -394,6 +415,7 @@
   cursor: pointer;
   box-shadow: 0 10px 24px rgba(70, 44, 125, 0.3);
   transition: all var(--transition);
+  font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 .auth-submit:hover {
