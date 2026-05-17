@@ -1,66 +1,50 @@
 import React from 'react';
 import './Sidebar.css';
-import { useNavigate, NavLink } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { VscAccount, VscArchive, VscHome, VscSettingsGear } from 'react-icons/vsc';
+import Dock from './Dock';
 
 function Sidebar() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const logout = () => {
     localStorage.removeItem('token');
     navigate('/');
   };
 
+  const navItems = [
+    { label: 'Dashboard', icon: <VscHome size={18} />, to: '/dashboard' },
+    { label: 'Transactions', icon: <VscArchive size={18} />, to: '/transactions' },
+    { label: 'Budgets', icon: <VscAccount size={18} />, to: '/budgets' },
+    { label: 'Reports', icon: <VscSettingsGear size={18} />, to: '/reports' }
+  ];
+
+  const dockItems = navItems.map((item) => ({
+    icon: item.icon,
+    label: item.label,
+    onClick: () => navigate(item.to),
+    className: location.pathname === item.to ? 'is-active' : ''
+  }));
+
   return (
-    <div className='sidebar'>
-      <div className='sidebar-top'>
+    <div className='nav-dock'>
+      <div className='nav-dock-header'>
         <div>
-          <h2>Expense Tracker</h2>
-          <p className='sidebar-subtitle'>Real-time finance workspace</p>
+          <p className='nav-dock-title'>Expense Tracker</p>
+          <p className='nav-dock-subtitle'>Realtime finance workspace</p>
         </div>
-        <span className='status-pill'>Online</span>
+        <button className='nav-dock-logout' onClick={logout}>
+          Logout
+        </button>
       </div>
 
-      <div className='sidebar-card'>
-        <p className='sidebar-card-title'>Focus</p>
-        <p className='sidebar-card-value'>Track, save, grow</p>
-      </div>
-
-      <ul>
-        <li>
-          <NavLink
-            to='/dashboard'
-            className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
-          >
-            Dashboard
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to='/transactions'
-            className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
-          >
-            Transactions
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to='/budgets'
-            className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
-          >
-            Budgets
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to='/reports'
-            className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
-          >
-            Reports
-          </NavLink>
-        </li>
-      </ul>
-
-      <button onClick={logout}>Logout</button>
+      <Dock
+        items={dockItems}
+        panelHeight={70}
+        baseItemSize={52}
+        magnification={76}
+      />
     </div>
   );
 }

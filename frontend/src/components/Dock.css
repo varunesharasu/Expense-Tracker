@@ -1,0 +1,87 @@
+.dock-outer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  max-width: 100%;
+  padding: 0.25rem 0.5rem 0;
+}
+
+.dock-panel {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.9rem;
+  padding: 0.35rem 0.75rem 0.75rem;
+  border-radius: 1.2rem;
+  background: linear-gradient(135deg, rgba(8, 27, 25, 0.95), rgba(16, 52, 43, 0.95));
+  border: 1px solid rgba(20, 184, 166, 0.35);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.28);
+  overflow: visible;
+}
+
+.dock-panel::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+}
+
+.dock-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(16, 62, 55, 0.95), rgba(10, 35, 31, 0.95));
+  border: 1px solid rgba(20, 184, 166, 0.2);
+  box-shadow: 0 8px 16px rgba(4, 47, 46, 0.45);
+  color: #e6fffb;
+  cursor: pointer;
+  outline: none;
+  transition: box-shadow 0.2s ease, border 0.2s ease, transform 0.2s ease;
+}
+
+.dock-item:hover {
+  box-shadow: 0 14px 24px rgba(8, 145, 178, 0.35);
+  border-color: rgba(20, 184, 166, 0.6);
+}
+
+.dock-item.is-active {
+  border-color: rgba(245, 158, 11, 0.8);
+  box-shadow: 0 16px 28px rgba(245, 158, 11, 0.35);
+}
+
+.dock-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dock-label {
+  position: absolute;
+  top: -2.1rem;
+  left: 50%;
+  width: fit-content;
+  white-space: pre;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(20, 184, 166, 0.4);
+  background: rgba(8, 27, 25, 0.95);
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  color: #f8fafc;
+  letter-spacing: 0.3px;
+  transform: translateX(-50%);
+}
+
+.dock-label::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%);
+  border-width: 6px 6px 0 6px;
+  border-style: solid;
+  border-color: rgba(8, 27, 25, 0.95) transparent transparent transparent;
+}

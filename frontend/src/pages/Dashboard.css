@@ -1,8 +1,8 @@
 .dashboard {
   display: grid;
-  grid-template-columns: 270px minmax(0, 1fr);
-  gap: 26px;
-  padding: 28px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  padding: 28px 28px 140px;
   min-height: 100vh;
   position: relative;
 }
@@ -249,7 +249,7 @@
 
 @media (max-width: 720px) {
   .dashboard {
-    padding: 20px;
+    padding: 20px 20px 130px;
   }
 
   .dashboard-header h1 {
