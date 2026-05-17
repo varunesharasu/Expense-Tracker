@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Login.css';
 import API from '../services/api';
 import { useNavigate, Link } from 'react-router-dom';
+import AuthIllustration from '../components/AuthIllustration';
 
 function Login() {
   const navigate = useNavigate();
@@ -43,47 +44,113 @@ function Login() {
   };
 
   return (
-    <div className='login-container'>
-      <form className='login-form' onSubmit={handleSubmit}>
-        <div className='auth-header'>
-          <h2>Welcome back</h2>
-          <p>Sign in to keep your spending on track.</p>
-        </div>
-
-        {error && <div className='auth-error'>{error}</div>}
-
-        <div className='auth-fields'>
-          <label className='input-label' htmlFor='login-email'>
-            Email
-          </label>
-          <input
-            id='login-email'
-            type='email'
-            name='email'
-            placeholder='name@company.com'
-            onChange={handleChange}
-          />
-
-          <label className='input-label' htmlFor='login-password'>
-            Password
-          </label>
-          <input
-            id='login-password'
-            type='password'
-            name='password'
-            placeholder='Enter your password'
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className='auth-actions'>
-          <button type='submit'>Login</button>
-
+    <div className='auth-shell auth-shell--login'>
+      <div className='auth-layout'>
+        <section className='auth-hero'>
+          <span className='auth-hero-badge'>Secure access</span>
+          <h1>Welcome to your finance studio.</h1>
           <p>
+            Track spending, plan budgets, and keep every transaction in view with a
+            clean, focused workspace.
+          </p>
+
+          <div className='auth-hero-art'>
+            <AuthIllustration />
+          </div>
+
+          <div className='auth-hero-notes'>
+            <div className='auth-note'>
+              <span className='auth-note-title'>Daily snapshots</span>
+              <span className='auth-note-value'>Smart spend summaries</span>
+            </div>
+            <div className='auth-note'>
+              <span className='auth-note-title'>Protected data</span>
+              <span className='auth-note-value'>Encrypted activity feed</span>
+            </div>
+          </div>
+        </section>
+
+        <form className='auth-card' onSubmit={handleSubmit}>
+          <div className='auth-card-header'>
+            <p className='auth-card-kicker'>Welcome to Expense Tracker</p>
+            <h2>Sign in to continue</h2>
+            <p className='auth-card-hint'>Pick up where you left off.</p>
+          </div>
+
+          <div className='auth-socials'>
+            <button type='button' className='auth-social'>
+              <span className='auth-social-icon auth-social-google'>G</span>
+              Login with Google
+            </button>
+            <button type='button' className='auth-social'>
+              <span className='auth-social-icon auth-social-facebook'>f</span>
+              Login with Facebook
+            </button>
+          </div>
+
+          <div className='auth-divider'>or</div>
+
+          {error && <div className='auth-error'>{error}</div>}
+
+          <div className='auth-fields'>
+            <label className='auth-label' htmlFor='login-email'>
+              Email
+            </label>
+            <div className='auth-input'>
+              <span className='auth-input-icon' aria-hidden='true'>
+                @
+              </span>
+              <input
+                id='login-email'
+                type='email'
+                name='email'
+                placeholder='name@company.com'
+                value={formData.email}
+                onChange={handleChange}
+                autoComplete='email'
+                required
+              />
+            </div>
+
+            <label className='auth-label' htmlFor='login-password'>
+              Password
+            </label>
+            <div className='auth-input'>
+              <span className='auth-input-icon' aria-hidden='true'>
+                *
+              </span>
+              <input
+                id='login-password'
+                type='password'
+                name='password'
+                placeholder='Enter your password'
+                value={formData.password}
+                onChange={handleChange}
+                autoComplete='current-password'
+                required
+              />
+            </div>
+          </div>
+
+          <div className='auth-inline'>
+            <label className='auth-check'>
+              <input type='checkbox' />
+              Remember me
+            </label>
+            <button type='button' className='auth-text-button'>
+              Forgot password?
+            </button>
+          </div>
+
+          <button type='submit' className='auth-submit'>
+            Login
+          </button>
+
+          <p className='auth-footer'>
             Don't have an account? <Link to='/register'>Register</Link>
           </p>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 }
