@@ -37,13 +37,6 @@ function Sidebar() {
 
   return (
     <div className='nav-dock'>
-      <div className='nav-dock-header'>
-        <div>
-          <p className='nav-dock-title'>Expense Tracker</p>
-          <p className='nav-dock-subtitle'>Realtime finance workspace</p>
-        </div>
-      </div>
-
       <Dock
         items={dockItems}
         panelHeight={70}
