@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import './Dashboard.css';
 import Sidebar from '../components/Sidebar';
 import TransactionList from '../components/TransactionList';
+import DecryptedText from '../components/DecryptedText';
 import API from '../services/api';
 
 function Budgets() {
@@ -47,6 +48,18 @@ function Budgets() {
     return entries.length ? entries[0][0] : 'No data';
   }, [expenseTransactions]);
 
+  const amountEffectProps = {
+    animateOn: 'view',
+    sequential: true,
+    revealDirection: 'start',
+    speed: 90,
+    maxIterations: 16,
+    characters: '0123456789$.,-',
+    className: 'decrypt-revealed',
+    encryptedClassName: 'decrypt-encrypted',
+    parentClassName: 'decrypt-text'
+  };
+
   return (
     <div className='dashboard'>
       <Sidebar />
@@ -71,7 +84,9 @@ function Budgets() {
         <div className='page-grid'>
           <div className='page-card'>
             <h3>Total spent</h3>
-            <p>${totalSpent.toFixed(2)}</p>
+            <p>
+              <DecryptedText text={`$${totalSpent.toFixed(2)}`} {...amountEffectProps} />
+            </p>
           </div>
           <div className='page-card'>
             <h3>Top category</h3>

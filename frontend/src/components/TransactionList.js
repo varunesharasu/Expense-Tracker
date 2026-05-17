@@ -1,6 +1,7 @@
 import React from 'react';
 import './TransactionList.css';
 import API from '../services/api';
+import DecryptedText from './DecryptedText';
 
 function TransactionList({
   transactions,
@@ -11,6 +12,18 @@ function TransactionList({
   const deleteTransaction = async (id) => {
     await API.delete(`/transactions/${id}`);
     fetchTransactions();
+  };
+
+  const amountEffectProps = {
+    animateOn: 'hover',
+    sequential: true,
+    revealDirection: 'start',
+    speed: 80,
+    maxIterations: 14,
+    characters: '0123456789$.,-',
+    className: 'decrypt-revealed',
+    encryptedClassName: 'decrypt-encrypted',
+    parentClassName: 'transaction-amount decrypt-text'
   };
 
   return (
@@ -31,7 +44,7 @@ function TransactionList({
             </div>
 
             <div className='transaction-actions'>
-              <span className='transaction-amount'>${item.amount}</span>
+              <DecryptedText text={`$${item.amount}`} {...amountEffectProps} />
               <button onClick={() => deleteTransaction(item._id)}>
                 Delete
               </button>

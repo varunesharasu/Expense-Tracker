@@ -1,0 +1,13 @@
+.decrypt-text {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.2px;
+}
+
+.decrypt-revealed {
+  color: inherit;
+}
+
+.decrypt-encrypted {
+  color: rgba(45, 106, 95, 0.55);
+  text-shadow: 0 0 6px rgba(20, 184, 166, 0.35);
+}
