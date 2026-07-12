@@ -11,7 +11,6 @@ exports.addTransaction = async (req, res) => {
   } catch (error) {
     console.error('Add transaction error:', error);
     
-    // Return 400 for validation errors
     if (error.name === 'ValidationError') {
       return res.status(400).json({ message: error.message });
     }
