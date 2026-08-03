@@ -15,5 +15,3 @@ API.interceptors.request.use((req) => {
 });
 
 export default API;
-
-// hi i am varunesh
