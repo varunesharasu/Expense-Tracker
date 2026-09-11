@@ -1,3 +1,2 @@
 ## Expense Tracker 
 
-## income tracker
